@@ -86,6 +86,7 @@ int main() {
         Operator,//Token.specificType values: ADD, SUB, ASSIGN, DIV, MULT
         Punctuation,//Token.specificType: LPAREN, RPAREN, PERIOD
         Comment,
+        End,
     };
     class LexAnalyzer
     {
@@ -395,6 +396,18 @@ int main() {
                     cout << " word cleared!";
 
                 }
+                case ('$'):
+                if (lexer.peek() == '$')
+                {
+                tkn.type = TokenType::End;
+                lexer.advance();
+                }
+                else
+                {
+                    cout << "Error, $ is not a valid input";
+                }
+                break;
+
             }
         }
         currentLine++;
