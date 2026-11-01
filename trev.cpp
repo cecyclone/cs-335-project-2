@@ -28,6 +28,12 @@ Token token3;
 
 vector<Token> tokenVector = {token0, token1, token2, token3};
 int n = 0;//tokenVector index
+//Parsing Declarations
+bool isExpr();
+bool isTerm();
+bool isFactor();
+bool isStatement();
+
 bool isAddOp()
 {
     if (tokenVector[n].specificType == "ADD" || tokenVector[n].specificType == "SUB")
@@ -130,6 +136,7 @@ bool isStatement()
     {
         if (tokenVector[n].specificType == "WRITE")
         {
+            n++;
             return (isExpr());
         }
         else if (tokenVector[n].specificType == "READ")
@@ -137,6 +144,7 @@ bool isStatement()
             n++;
             if (tokenVector[n].type == TokenType::Identifier)
             {
+                n++;
                 return true;
             }
             return false;
