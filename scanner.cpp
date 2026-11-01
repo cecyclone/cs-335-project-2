@@ -401,6 +401,7 @@ int main() {
                 {
                 tkn.type = TokenType::End;
                 lexer.advance();
+                lexer.advance();
                 }
                 else
                 {
