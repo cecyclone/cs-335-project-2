@@ -14,6 +14,7 @@ using namespace std;
         Operator,//Token.specificType values: ADD, SUB, ASSIGN, DIV, MULT
         Punctuation,//Token.specificType: LPAREN, RPAREN, PERIOD
         Comment,
+        End,// CREATE "$$" TOKEN
     };
     struct Token
     {
@@ -146,11 +147,15 @@ bool isStatement()
 }
 bool isStatementList()
 {
-    if (isStatement())
+    if (tokenVector[n].type == TokenType::End)
     {
-        return (isStatementList());
+        return true;
     }
-    return true;
+    if (!isStatement())
+    {
+        return false;
+    }
+    return isStatementList();
 }
 
 int main(){
