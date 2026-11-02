@@ -393,6 +393,7 @@ int main() {
                 }
 
                 tkn.type = TokenType::Number;
+                tkn.specificType = number;
                 cout << number << " stored as token!" << endl;
                 tokenVector.push_back(tkn); // push token onto vector
                 number = "";
@@ -411,6 +412,7 @@ int main() {
             if (lexer.peek() == '$')
             {
                 tkn.type = TokenType::End;
+                tkn.specificType = "End";
                 tokenVector.push_back(tkn); // push token onto vector
                 lexer.advance();
                 lexer.advance();
@@ -438,6 +440,7 @@ int main() {
                     lexer.advance();
                 }
                 tkn.type = TokenType::Number;
+                tkn.specificType = number;
                 cout << number << " stored as token!\t";
                 tokenVector.push_back(tkn); // push token onto vector
                 number = "";
@@ -486,7 +489,11 @@ int main() {
     }
     cout << endl << "LOADING TOKENS COMPLETE!" << endl << endl;
 
-    
+    cout << "DEBUG: Tokens" << endl;
+    for (int i = 0; i < tokenVector.size(); i++){
+        cout << "\tValue:\t" << tokenVector[i].specificType << endl;
+    }
+
 
     // "Write main, which entails using the recursive descent logic PLUS conditionals that will determine the output"
 
