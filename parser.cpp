@@ -63,12 +63,13 @@ struct Token
     TokenType type = TokenType::Default;
     string specificType = "";
 };
-Token token0;
+/*Token token0;
 Token token1;
 Token token2;
 Token token3;
 
-vector<Token> tokenVector = {token0, token1, token2, token3};
+vector<Token> tokenVector = {token0, token1, token2, token3};*/
+vector<Token> tokenVector = {};
 int n = 0;//tokenVector index
 //Parsing Declarations
 bool isExpr();
@@ -300,8 +301,6 @@ int main() {
             }
     };
 
-    vector<Token> tokens = {}; // vector to store tokens from input
-
     // Load input file and store each line as a token in "tokens" vector. Logic mostly reused from Project 1
     cout << "LOADING TOKENS FROM INPUT FILE..." << endl << endl;
     inputFileToVector();
@@ -324,16 +323,14 @@ int main() {
             tkn.type = TokenType::Operator;
             tkn.specificType = "ADD";
             cout << "add token stored!" << endl;
-            //output << "+" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();
-
-
             break;
         case ('-'):
             tkn.type = TokenType::Operator;
             tkn.specificType = "SUB";
             cout << "sub token stored!" << endl;
-            //output << "-" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();
             break;
 
@@ -341,14 +338,14 @@ int main() {
             tkn.type = TokenType::Operator;
             tkn.specificType = "MULT";
             cout << "mult token stored!" << endl;
-            //output << "*" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();;
             break;
         case ('/'):
             tkn.type = TokenType::Operator;
             tkn.specificType = "DIV";
             cout << "div token stored!" << endl;
-            //output << "/" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();
             break;
 
@@ -358,7 +355,7 @@ int main() {
                 tkn.type = TokenType::Operator;
                 tkn.specificType = "ASSIGN";
                 cout << "assign token stored!" << endl;
-                //output << ":=" << endl;
+                tokenVector.push_back(tkn); // push token onto vector
                 lexer.advance();
                 lexer.advance();
             }
@@ -372,14 +369,14 @@ int main() {
             tkn.type = TokenType::Punctuation;
             tkn.specificType = "LPAREN";
             cout << "lparen token stored!" << endl;
-            //output << "(" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();
             break;
         case (')'):
             tkn.type = TokenType::Punctuation;
             tkn.specificType = "RPAREN";
             cout << "rparen token stored!" << endl;
-            //output << ")" << endl;
+            tokenVector.push_back(tkn); // push token onto vector
             lexer.advance();
             break;
         case ('.'):
@@ -397,7 +394,7 @@ int main() {
 
                 tkn.type = TokenType::Number;
                 cout << number << " stored as token!" << endl;
-                //output << number << endl;
+                tokenVector.push_back(tkn); // push token onto vector
                 number = "";
                 cout << " number cleared!";
             }
@@ -406,7 +403,7 @@ int main() {
                 tkn.type = TokenType::Punctuation;
                 tkn.specificType = "PERIOD";
                 cout << "period stored!" << endl;
-                //output << "." << endl;
+                tokenVector.push_back(tkn); // push token onto vector
                 lexer.advance();
             }
             break;
@@ -414,6 +411,7 @@ int main() {
             if (lexer.peek() == '$')
             {
                 tkn.type = TokenType::End;
+                tokenVector.push_back(tkn); // push token onto vector
                 lexer.advance();
                 lexer.advance();
             }
@@ -441,7 +439,7 @@ int main() {
                 }
                 tkn.type = TokenType::Number;
                 cout << number << " stored as token!\t";
-                //output << number << endl;
+                tokenVector.push_back(tkn); // push token onto vector
                 number = "";
                 cout << "number cleared!" << endl;
             }
@@ -459,14 +457,14 @@ int main() {
                     {
                         tkn.specificType = "READ";
                         cout << "keyword read stored\t";
-                        //output << "read" << endl;
+                        tokenVector.push_back(tkn); // push token onto vector
 
                     }
                     else if (word == "write")
                     {
                         tkn.specificType = "WRITE";
                         cout << "keyword write stored\t";
-                        //output << "write" << endl;
+                        tokenVector.push_back(tkn); // push token onto vector
                     }
                     else
                     {
@@ -478,7 +476,7 @@ int main() {
                     tkn.type = TokenType::Identifier;
                     tkn.specificType = word;
                     cout << "identifier \"" << word << "\" stored!\t";
-                    //output << word << endl;
+                    tokenVector.push_back(tkn); // push token onto vector
                 }
                 word = "";
                 cout << " word cleared!" << endl;
@@ -488,7 +486,7 @@ int main() {
     }
     cout << endl << "LOADING TOKENS COMPLETE!" << endl << endl;
 
-
+    
 
     // "Write main, which entails using the recursive descent logic PLUS conditionals that will determine the output"
 
@@ -496,7 +494,7 @@ int main() {
 
     // Creating the actual Output file
 
-    
+
 
     return 0;
 }
